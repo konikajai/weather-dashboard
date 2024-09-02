@@ -5,9 +5,8 @@ const StateContext = createContext();
 
 export const StateContextProvider = ({ children }) => {
     const [weather, setWeather] = useState({});
-    const [values, setValues] = useState([]);
     const [place, setPlace] = useState('Jaipur');
-    const [thisLocation, setLocation] = useState('');
+    const [Location, setLocation] = useState('');
 
     const fetchWeather = async () => {
         const apiKey = process.env.REACT_APP_API_KEY;
@@ -27,7 +26,6 @@ export const StateContextProvider = ({ children }) => {
                 conditions: response.data.weather[0].description,
               });
 
-            setValues([]);
         } catch (e) {
             console.error(e);
             alert('This place does not exist');
@@ -38,15 +36,11 @@ export const StateContextProvider = ({ children }) => {
         fetchWeather();
     }, [place]);
 
-    useEffect(() => {
-        console.log(values);
-    }, [values]);
-
     console.log(weather.temperature + ' t');
     console.log(weather.humidity + ' h');
 
     return (
-        <StateContext.Provider value={{weather, setPlace, values, thisLocation, place}}>
+        <StateContext.Provider value={{weather, setPlace, Location, place}}>
             {children}
         </StateContext.Provider>
     );

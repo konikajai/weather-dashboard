@@ -12,7 +12,7 @@ import { useStateContext } from '../Context';
 
 const WeatherCard = () => {
 
-  const glassCardStyle = {
+  const CardStyle = {
     width: '22rem',
     minWidth: '22rem',
     height: '30rem',
@@ -24,7 +24,7 @@ const WeatherCard = () => {
     boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)'
   };
 
-  const { weather, thisLocation } = useStateContext();
+  const { weather, Location } = useStateContext();
   const [icon, setIcon] = useState(sun)
   const { time } = useDate()
 
@@ -50,20 +50,20 @@ const WeatherCard = () => {
   }, [weather.iconString]);
 
   return (
-    <div style ={glassCardStyle}>
+    <div style ={CardStyle}>
       <div className='flex w-full just-center, items-center gap-4 mt-12 mb-4'>
         <img src={icon} alt="weather_icon" />
         <p className='font-bold text-5xl flex justify-center items-center' >{weather.temperature} &deg;C</p>
       </div>
       <div className='font-bold text-center text-xl'>
-        {thisLocation}
+        {Location}
       </div>
       <div className='w-full flex justify-between items-center mt-4'>
         <p className='flex-1 text-center p-2'>{new Date().toDateString()}</p>
         <p className='flex-1 text-center p-2'>{time}</p>
       </div>
       <div className='w-full flex justify-between items-center mt-4 gap-4'>
-        <p className='flex-1 text-center p-2 font-bold bg-blue-600 shadow rounded-lg'>Wind Speed <p className='font-normal'>{weather.windspeed} km/h</p></p>
+        <p className='flex-1 text-center p-2 font-bold bg-blue-600 shadow rounded-lg'>Wind Speed <p className='font-normal'>{weather.windSpeed} km/h</p></p>
         <p className='flex-1 text-center p-2 font-bold rounded-lg bg-green-600'>Humidity <p className='font-normal'>{weather.humidity} gm/m&#179;</p></p>
       </div>
       <div className='w-full p-3 mt-4 flex justify-between items-center'>
